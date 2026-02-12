@@ -1,0 +1,5 @@
+{
+  "name": "Sequential Page Content Extractor",
+  "description": "An intelligent document processor that extracts content page-by-page using Gemini AI, providing a real-time sequential processing view.",
+  "requestFramePermissions": []
+}
