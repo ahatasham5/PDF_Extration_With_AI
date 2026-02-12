@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { 
   FileUp, 
   Loader2, 
@@ -9,7 +9,10 @@ import {
   Files, 
   RotateCcw,
   BookOpen,
-  Layout
+  Layout,
+  Copy,
+  Check,
+  FileText
 } from 'lucide-react';
 import { ProcessingState, PageExtraction } from './types';
 import { getPageCount, getPageAsImage, getPageAsDataUrl } from './services/pdfProcessor';
@@ -23,10 +26,12 @@ const App: React.FC = () => {
     results: []
   });
   const [file, setFile] = useState<File | null>(null);
+  const [copied, setCopied] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const reset = () => {
     setFile(null);
+    setCopied(false);
     setState({
       status: 'idle',
       totalPages: 0,
@@ -110,6 +115,23 @@ const App: React.FC = () => {
     }
   };
 
+  const combinedContent = useMemo(() => {
+    return state.results
+      .filter(r => r.status === 'completed')
+      .map(r => `--- Page ${r.pageNumber} ---\n${r.content}`)
+      .join('\n\n');
+  }, [state.results]);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(combinedContent);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
   // Auto-scroll to the current processing page
   useEffect(() => {
     if (state.status === 'processing' && scrollRef.current) {
@@ -166,7 +188,7 @@ const App: React.FC = () => {
         )}
 
         {(state.status === 'loading' || state.status === 'processing' || state.status === 'completed') && (
-          <div className="space-y-8">
+          <div className="space-y-8 pb-20">
             {/* Progress Panel */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -272,6 +294,40 @@ const App: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            {/* Combined Final Output */}
+            {state.status === 'completed' && (
+              <div className="mt-12 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center justify-between px-2">
+                  <div className="flex items-center space-x-2">
+                    <FileText className="w-6 h-6 text-indigo-600" />
+                    <h2 className="text-2xl font-bold text-gray-900">Final Combined Extraction</h2>
+                  </div>
+                  <button
+                    onClick={copyToClipboard}
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-sm ${
+                      copied 
+                        ? 'bg-green-500 text-white' 
+                        : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                    }`}
+                  >
+                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    <span>{copied ? 'Copied All' : 'Copy All Text'}</span>
+                  </button>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl shadow-indigo-100/20 relative">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                    <FileText className="w-32 h-32 text-indigo-600" />
+                  </div>
+                  <div className="prose prose-indigo max-w-none">
+                    <pre className="whitespace-pre-wrap font-sans text-base text-gray-800 leading-relaxed bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
+                      {combinedContent || "No text was extracted successfully."}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
