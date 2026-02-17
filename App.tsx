@@ -548,7 +548,7 @@ const App: React.FC = () => {
       <footer className="py-8 border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-400">
-            Product of As-Sunnah Foundation • On Development (Demo)
+            Product of As-Sunnah Foundation • On Development (Demo) • Developer Arman
           </p>
         </div>
       </footer>
