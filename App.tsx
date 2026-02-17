@@ -194,7 +194,7 @@ const App: React.FC = () => {
               <BookOpen className="w-5 h-5 text-white" />
             </div>
             <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-              DocuFlow <span className="text-indigo-600">AI</span>
+              ExamPaper <span className="text-indigo-600">Evaluation AI</span>
             </h1>
           </div>
           {state.status !== 'idle' && (
@@ -216,10 +216,10 @@ const App: React.FC = () => {
             <div className="w-full max-w-xl bg-indigo-50/50 rounded-2xl p-8 border border-indigo-100">
               <div className="flex items-center space-x-3 mb-4">
                 <ClipboardCheck className="w-6 h-6 text-indigo-600" />
-                <h3 className="text-lg font-bold text-gray-900">1. Add Answer Key</h3>
+                <h3 className="text-lg font-bold text-gray-900">1. Upload Original Answer Script</h3>
               </div>
               <p className="text-sm text-gray-600 mb-6">
-                If you want AI to grade this paper, upload the official answer key or original document here.
+                Please upload the original answer script along with the question so that it can be compared with the student's answer script. 
               </p>
               <div className="relative group">
                 <input
@@ -239,9 +239,9 @@ const App: React.FC = () => {
               <div className="inline-flex items-center justify-center w-20 h-20 bg-indigo-50 rounded-full mb-6 group-hover:scale-110 transition-transform">
                 <FileUp className="w-10 h-10 text-indigo-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">2. Upload Student Work</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">2. Upload Student Answer Script</h2>
               <p className="text-gray-500 mb-8 max-w-xs mx-auto">
-                First, select the student's answer sheet (PDF).
+                Select the student's answer sheet (PDF).
               </p>
               <label className="inline-block px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl cursor-pointer hover:bg-indigo-700 active:bg-indigo-800 transition-colors shadow-lg shadow-indigo-200">
                 Select Student PDF
@@ -548,7 +548,7 @@ const App: React.FC = () => {
       <footer className="py-8 border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-400">
-            Powered by Gemini 2.5/3 Pro & PDF.js • Secure In-Browser Processing
+            Product of As-Sunnah Foundation • On Development (Demo)
           </p>
         </div>
       </footer>
