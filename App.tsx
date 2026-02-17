@@ -194,7 +194,7 @@ const App: React.FC = () => {
               <BookOpen className="w-5 h-5 text-white" />
             </div>
             <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-              ExamPaper <span className="text-indigo-600">Evaluation AI</span>
+              ExamPaper <span className="text-indigo-600">Evaluation - AI</span>
             </h1>
           </div>
           {state.status !== 'idle' && (
