@@ -212,24 +212,11 @@ const App: React.FC = () => {
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         {state.status === 'idle' && (
           <div className="flex flex-col items-center justify-center py-10 space-y-8">
-            <div className="w-full max-w-xl bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center hover:border-indigo-400 transition-all group">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-indigo-50 rounded-full mb-6 group-hover:scale-110 transition-transform">
-                <FileUp className="w-10 h-10 text-indigo-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">1. Upload Student Work</h2>
-              <p className="text-gray-500 mb-8 max-w-xs mx-auto">
-                First, select the student's answer sheet (PDF).
-              </p>
-              <label className="inline-block px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl cursor-pointer hover:bg-indigo-700 active:bg-indigo-800 transition-colors shadow-lg shadow-indigo-200">
-                Select Student PDF
-                <input type="file" className="hidden" accept=".pdf" onChange={onFileChange} />
-              </label>
-            </div>
 
             <div className="w-full max-w-xl bg-indigo-50/50 rounded-2xl p-8 border border-indigo-100">
               <div className="flex items-center space-x-3 mb-4">
                 <ClipboardCheck className="w-6 h-6 text-indigo-600" />
-                <h3 className="text-lg font-bold text-gray-900">2. Add Answer Key (Optional)</h3>
+                <h3 className="text-lg font-bold text-gray-900">1. Add Answer Key</h3>
               </div>
               <p className="text-sm text-gray-600 mb-6">
                 If you want AI to grade this paper, upload the official answer key or original document here.
@@ -248,6 +235,20 @@ const App: React.FC = () => {
                 )}
               </div>
             </div>
+            <div className="w-full max-w-xl bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center hover:border-indigo-400 transition-all group">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-indigo-50 rounded-full mb-6 group-hover:scale-110 transition-transform">
+                <FileUp className="w-10 h-10 text-indigo-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">2. Upload Student Work</h2>
+              <p className="text-gray-500 mb-8 max-w-xs mx-auto">
+                First, select the student's answer sheet (PDF).
+              </p>
+              <label className="inline-block px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl cursor-pointer hover:bg-indigo-700 active:bg-indigo-800 transition-colors shadow-lg shadow-indigo-200">
+                Select Student PDF
+                <input type="file" className="hidden" accept=".pdf" onChange={onFileChange} />
+              </label>
+            </div>
+
           </div>
         )}
 
