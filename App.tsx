@@ -118,7 +118,7 @@ const App: React.FC = () => {
   const combinedContent = useMemo(() => {
     return state.results
       .filter(r => r.status === 'completed')
-      .map(r => `--- Page ${r.pageNumber} ---\n${r.content}`)
+      .map(r => r.content) // Only taking the raw extracted content
       .join('\n\n');
   }, [state.results]);
 
